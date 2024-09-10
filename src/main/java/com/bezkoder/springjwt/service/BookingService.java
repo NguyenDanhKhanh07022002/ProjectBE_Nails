@@ -10,4 +10,6 @@ public interface BookingService {
     Booking getBookingById(Long id);
     void deleteBooking(Long id);
     List<Booking> getAllBookings();
+
+    List<Booking> findByPhoneNumber(String phoneNumber);
 }

@@ -55,4 +55,9 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
     }
+
+    @Override
+    public List<Booking> findByPhoneNumber(String phoneNumber) {
+        return (List<Booking>) bookingRepository.findByPhoneNumber(phoneNumber);
+    }
 }

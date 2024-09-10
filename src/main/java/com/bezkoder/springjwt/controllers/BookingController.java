@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/bookings")
 public class BookingController {
@@ -35,8 +36,13 @@ public class BookingController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public ResponseEntity<List<Booking>> getAllBookings() {
         return ResponseEntity.ok(bookingService.getAllBookings());
+    }
+
+    @GetMapping("/getPhoneNumbet/{phoneNumber}")
+    public List<Booking> findByPhonenumber(@PathVariable String phoneNumber) {
+        return (List<Booking>) bookingService.findByPhoneNumber(phoneNumber);
     }
 }
