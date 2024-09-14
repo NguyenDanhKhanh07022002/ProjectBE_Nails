@@ -29,6 +29,7 @@ public class BookingServiceImpl implements BookingService {
             booking.setFullName(bookingDetails.getFullName());
             booking.setPhoneNumber(bookingDetails.getPhoneNumber());
             booking.setEmail(bookingDetails.getEmail());
+            booking.setBookingService(bookingDetails.getBookingService());
             booking.setDescription(bookingDetails.getDescription());
             return bookingRepository.save(booking);
         } else {

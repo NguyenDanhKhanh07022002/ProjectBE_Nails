@@ -27,10 +27,13 @@ public class Booking {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "bookingService")
+    private String bookingService;
+
     public Booking() {
     }
 
-    public Booking(Long id, String date, String time, String fullName, String phoneNumber, String email, String description) {
+    public Booking(Long id, String date, String time, String fullName, String phoneNumber, String email, String description, String bookingService) {
         this.id = id;
         this.date = date;
         this.time = time;
@@ -38,6 +41,7 @@ public class Booking {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.description = description;
+        this.bookingService = bookingService;
     }
 
     public Long getId() {
@@ -94,5 +98,13 @@ public class Booking {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getBookingService() {
+        return bookingService;
+    }
+
+    public void setBookingService(String bookingService) {
+        this.bookingService = bookingService;
     }
 }
