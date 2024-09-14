@@ -30,10 +30,16 @@ public class Booking {
     @Column(name = "bookingService")
     private String bookingService;
 
+    @Column(name = "createAt")
+    private String createAt;
+
+    @Column(name = "deleted")
+    private boolean deleted;
+
     public Booking() {
     }
 
-    public Booking(Long id, String date, String time, String fullName, String phoneNumber, String email, String description, String bookingService) {
+    public Booking(Long id, String date, String time, String fullName, String phoneNumber, String email, String description, String bookingService, String createAt, boolean deleted) {
         this.id = id;
         this.date = date;
         this.time = time;
@@ -42,6 +48,8 @@ public class Booking {
         this.email = email;
         this.description = description;
         this.bookingService = bookingService;
+        this.createAt = createAt;
+        this.deleted = deleted;
     }
 
     public Long getId() {
@@ -106,5 +114,21 @@ public class Booking {
 
     public void setBookingService(String bookingService) {
         this.bookingService = bookingService;
+    }
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }
