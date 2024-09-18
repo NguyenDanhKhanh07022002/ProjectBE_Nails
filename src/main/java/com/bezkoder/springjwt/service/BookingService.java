@@ -12,5 +12,5 @@ public interface BookingService {
     void deleteBooking(Long id);
     List<Booking> getAllBookings();
 
-    List<Booking> findByPhoneNumber(String phoneNumber);
+    List<Booking> findByPhoneNumber(String phoneNumber, String email);
 }

@@ -2,20 +2,24 @@ package com.bezkoder.springjwt.controllers;
 
 import com.bezkoder.springjwt.models.User;
 import com.bezkoder.springjwt.repository.UserRepository;
+import com.bezkoder.springjwt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/forgotPassword")
     public ResponseEntity<?> forgotPassword(@RequestBody User request) {
        Long id = Long.valueOf(request.getId());
@@ -30,5 +34,10 @@ public class UserController {
        user.setPassword(passwordEncoder.encode(password));
        userRepository.save(user);
        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/getUserById/{id}")
+    public ResponseEntity<User> getUserById (@PathVariable Long id) {
+        return ResponseEntity.ok(userService.findUsersById(id));
     }
 }

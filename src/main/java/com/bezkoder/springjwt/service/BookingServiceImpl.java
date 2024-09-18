@@ -120,7 +120,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> findByPhoneNumber(String phoneNumber) {
-        return (List<Booking>) bookingRepository.findByPhoneNumber(phoneNumber);
+    public List<Booking> findByPhoneNumber(String phoneNumber, String email) {
+        return (List<Booking>) bookingRepository.findByPhoneNumber(phoneNumber, email);
     }
 }

@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-    @Query("SELECT b FROM Booking b WHERE b.phoneNumber = :phoneNumber")
-    List<Booking> findByPhoneNumber(@Param("phoneNumber") String phoneNumber);
+    @Query("SELECT b FROM Booking b WHERE b.phoneNumber = :phoneNumber  OR b.email = :email")
+    List<Booking> findByPhoneNumber(@Param("phoneNumber") String phoneNumber, @Param("email") String email);
 }

@@ -25,7 +25,8 @@ public class BookingController {
 
     @PostMapping("/create")
     public ResponseEntity<ResponseEntity<Object>> createBooking(@RequestBody Booking booking) {
-        return ResponseEntity.ok(bookingService.createBooking(booking));
+        ResponseEntity<Object> newBooking = bookingService.createBooking(booking);
+        return ResponseEntity.ok(newBooking);
     }
 
     @PutMapping("/update/{id}")
@@ -49,8 +50,9 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.getAllBookings());
     }
 
-    @GetMapping("/getPhoneNumbet/{phoneNumber}")
-    public List<Booking> findByPhonenumber(@PathVariable String phoneNumber) {
-        return (List<Booking>) bookingService.findByPhoneNumber(phoneNumber);
+    @GetMapping("/getPhoneNumberOrEmail")
+    public List<Booking> findByPhonenumber(@RequestParam(required = false) String phoneNumber,
+                                           @RequestParam(required = false) String email) {
+        return (List<Booking>) bookingService.findByPhoneNumber(phoneNumber.trim(), email.trim());
     }
 }
