@@ -100,8 +100,11 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void deleteBooking(Long id) {
-        if (bookingRepository.existsById(id)) {
-            bookingRepository.deleteById(id);
+        Optional<Booking> booking = bookingRepository.findById(id);
+        if (booking.isPresent()) {
+            Booking existingBooking = booking.get();
+            existingBooking.setDeleted(true);
+            bookingRepository.save(existingBooking);
         } else {
             throw new RuntimeException("Booking not found with id: " + id);
         }
