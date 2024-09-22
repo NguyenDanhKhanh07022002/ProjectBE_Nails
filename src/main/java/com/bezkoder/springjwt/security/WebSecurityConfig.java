@@ -90,12 +90,13 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests().antMatchers("/api/auth/**").permitAll()
             .antMatchers("/api/bookings/**").permitAll()
+            .antMatchers("/api/message/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .logout()
-            .logoutUrl("/api/auth/logout") // URL for logout
-            .invalidateHttpSession(true) // Invalidate session on logout
-            .deleteCookies("JSESSIONID") // Delete session cookies
+            .logoutUrl("/api/auth/logout")
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID")
             .logoutSuccessHandler((request, response, authentication) -> {
               response.setStatus(HttpServletResponse.SC_OK);
               response.getWriter().flush();
