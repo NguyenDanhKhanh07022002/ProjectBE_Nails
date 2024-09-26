@@ -29,6 +29,13 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     private SentMail sentMail;
 
+    private static final String MANICURE = "Manicure";
+    private static final String PEDICURE = "Pedicure";
+    private static final String MANICURE_PEDICURE = "Manicure + Pedicure";
+    private static final String PRODLUZOVANI_RAS = "Prodluzování Ras";
+    private static final String MASSAGE = "Massage";
+    private static final String COSMETICS = "Cosmetics";
+
     @Override
     public ResponseEntity<Object> createBooking(Booking booking) {
         String email = booking.getEmail().trim();
@@ -43,6 +50,26 @@ public class BookingServiceImpl implements BookingService {
         if (!isValidEmail(email)) {
             return ResponseEntity.badRequest().body(null);
         }
+        switch (bookingSelection) {
+            case "1":
+                bookingSelection = MANICURE;
+                break;
+            case "2":
+                bookingSelection = PEDICURE;
+                break;
+            case "3":
+                bookingSelection = MANICURE_PEDICURE;
+                break;
+            case "4":
+                bookingSelection = PRODLUZOVANI_RAS;
+                break;
+            case "5":
+                bookingSelection = MASSAGE;
+                break;
+            default:
+                bookingSelection = COSMETICS;
+                break;
+            }
         Booking createBooking = bookingRepository.save(booking);
         String subject = "New Booking Details";
         String text = String.format("Booking Details:\n\nThank you for ordering our services!\nFull Name: %s\nBooking Service: %s\nPhone Number: %s\nDate: %s\nTime: %s\nDescription: %s",
