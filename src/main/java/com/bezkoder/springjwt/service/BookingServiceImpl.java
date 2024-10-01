@@ -29,6 +29,8 @@ public class BookingServiceImpl implements BookingService {
 
     @Autowired
     private SentMail sentMail;
+    private
+    SocketModule socketModule;
 
     private static final String MANICURE = "Manicure";
     private static final String PEDICURE = "Pedicure";
