@@ -74,6 +74,15 @@
 		</dependency>
 
 		<dependency>
+<<<<<<< Updated upstream
+=======
+			<groupId>com.corundumstudio.socketio</groupId>
+			<artifactId>netty-socketio</artifactId>
+			<version>1.7.17</version>
+		</dependency>
+
+		<dependency>
+>>>>>>> Stashed changes
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>

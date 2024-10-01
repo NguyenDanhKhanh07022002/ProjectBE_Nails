@@ -3,7 +3,9 @@ package com.bezkoder.springjwt.service;
 import com.bezkoder.springjwt.config.MailConfig;
 import com.bezkoder.springjwt.config.SentMail;
 import com.bezkoder.springjwt.models.Booking;
+import com.bezkoder.springjwt.models.MessageNotify;
 import com.bezkoder.springjwt.repository.BookingRepository;
+import com.bezkoder.springjwt.socket.SocketModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -68,16 +70,22 @@ public class BookingServiceImpl implements BookingService {
             default:
                 bookingSelection = COSMETICS;
                 break;
-            }
+        }
         Booking createBooking = bookingRepository.save(booking);
         String subject = "New Booking Details";
-        String text = String.format("Booking Details:\n\nThank you for ordering our services!\nFull Name: %s\nBooking Service: %s\nPhone Number: %s\nDate: %s\nTime: %s\nDescription: %s",
+        String text = String.format(
+                "Booking Details:\n\nThank you for ordering our services!\nFull Name: %s\nBooking Service: %s\nPhone Number: %s\nDate: %s\nTime: %s\nDescription: %s",
                 fullName, bookingSelection, phoneNumber, date, time, description);
         sentMail.sendEmail(email, subject, text);
         String configEmail = mailConfig.getRecipientEmail();
-        String textConfig = String.format("Booking Details:\n\nFull Name: %s\nBooking Service: %s\nPhone Number: %s\nDate: %s\nTime: %s\nDescription: %s",
+        String textConfig = String.format(
+                "Booking Details:\n\nFull Name: %s\nBooking Service: %s\nPhone Number: %s\nDate: %s\nTime: %s\nDescription: %s",
                 fullName, bookingSelection, phoneNumber, date, time, description);
         sentMail.sendEmail(configEmail, subject, textConfig);
+
+        MessageNotify messageNotify = new MessageNotify();
+        messageNotify.setContent(text);
+        socketModule.broadcastMessage("3", messageNotify);
         return ResponseEntity.ok(createBooking);
     }
 
