@@ -5,7 +5,6 @@ import com.bezkoder.springjwt.config.SentMail;
 import com.bezkoder.springjwt.models.Booking;
 import com.bezkoder.springjwt.models.MessageNotify;
 import com.bezkoder.springjwt.repository.BookingRepository;
-import com.bezkoder.springjwt.socket.SocketModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -29,8 +28,6 @@ public class BookingServiceImpl implements BookingService {
 
     @Autowired
     private SentMail sentMail;
-    private
-    SocketModule socketModule;
 
     private static final String MANICURE = "Manicure";
     private static final String PEDICURE = "Pedicure";
@@ -84,10 +81,6 @@ public class BookingServiceImpl implements BookingService {
                 "Booking Details:\n\nFull Name: %s\nBooking Service: %s\nPhone Number: %s\nDate: %s\nTime: %s\nDescription: %s",
                 fullName, bookingSelection, phoneNumber, date, time, description);
         sentMail.sendEmail(configEmail, subject, textConfig);
-
-        MessageNotify messageNotify = new MessageNotify();
-        messageNotify.setContent(text);
-        socketModule.broadcastMessage("3", messageNotify);
         return ResponseEntity.ok(createBooking);
     }
 
