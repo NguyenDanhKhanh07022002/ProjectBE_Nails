@@ -32,9 +32,12 @@ public class BookingServiceImpl implements BookingService {
     private static final String MANICURE = "Manicure";
     private static final String PEDICURE = "Pedicure";
     private static final String MANICURE_PEDICURE = "Manicure + Pedicure";
+    private static final String MODELACE_UMELY = "Modelace Umelých Nehtú";
+    private static final String ZDOBENI = "Zdobení Nehtú";
+    private static final String UPRAVY = "Úpravy Nehtú";
     private static final String PRODLUZOVANI_RAS = "Prodluzování Ras";
-    private static final String MASSAGE = "Massage";
-    private static final String COSMETICS = "Cosmetics";
+    private static final String MASSAGE = "Masáze";
+    private static final String COSMETICS = "Další služby";
 
     @Override
     public ResponseEntity<Object> createBooking(Booking booking) {
@@ -61,9 +64,18 @@ public class BookingServiceImpl implements BookingService {
                 bookingSelection = MANICURE_PEDICURE;
                 break;
             case "4":
-                bookingSelection = PRODLUZOVANI_RAS;
+                bookingSelection = MODELACE_UMELY;
                 break;
             case "5":
+                bookingSelection = ZDOBENI;
+                break;
+            case "6":
+                bookingSelection = UPRAVY;
+                break;
+            case "7":
+                bookingSelection = PRODLUZOVANI_RAS;
+                break;
+            case "8":
                 bookingSelection = MASSAGE;
                 break;
             default:
