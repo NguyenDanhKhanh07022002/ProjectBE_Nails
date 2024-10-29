@@ -91,6 +91,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
             .authorizeRequests().antMatchers("/api/auth/**").permitAll()
             .antMatchers("/api/bookings/**").permitAll()
             .antMatchers("/api/message/**").permitAll()
+            .antMatchers("/api/close-times/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .logout()
